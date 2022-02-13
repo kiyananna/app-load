@@ -13,6 +13,6 @@
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
-    "firebase": "^9.6.6"
+    "firebase": "^8.2.5"
   }
 }

@@ -21,7 +21,7 @@ const element = (tag, classes = [], content) => {
   return node;
 };
 
-// Если ничего не передали в onUpload
+// Если ничего не передали в onUpload (пустая функция, не будет ошибок, есл ничего не передавали в optionsupload)
 function noop() {}
 
 export function upload(selector, options = {}) {
@@ -115,6 +115,8 @@ export function upload(selector, options = {}) {
       .querySelector(`[data-name="${name}"]`)
       .closest('.preview-image');
 
+    const parent = block;
+
     block.classList.add('removing');
     setTimeout(() => block.remove(), 300);
   };
@@ -126,10 +128,12 @@ export function upload(selector, options = {}) {
 
   const upLoadHandler = () => {
     // Удаляем элемент
+    // Все иконки с крестиками
     preview.querySelectorAll('.preview-remove').forEach((e) => e.remove());
+    // В блоке с информацией удаляем инфо и добавляем класс с загрузкой
     const previewInfo = preview.querySelectorAll('.preview-info');
     previewInfo.forEach(clearPreview);
-    onUpload(files);
+    onUpload(files, previewInfo);
   };
 
   open.addEventListener('click', triggerInput);
